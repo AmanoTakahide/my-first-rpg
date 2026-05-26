@@ -4,47 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一撃必殺RPG</title>
-    <style>
-        body {
-            font-family: 'Courier New', sans-serif;
-            text-align: center;
-            background-color: #000000;
-            color: white;
-            margin: 0;
-            padding: 20px;
-            touch-action: manipulation;
-        }
-        h1 { font-size: 20px; margin-bottom: 10px; }
-        canvas {
-            border: 4px solid #fff;
-            background-color: #111;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-        }
-        .controller {
-            margin-top: 15px;
-            display: inline-grid;
-            grid-template-columns: repeat(3, 60px);
-            grid-template-rows: repeat(3, 60px);
-            gap: 5px;
-        }
-        .btn {
-            background-color: #222;
-            color: white;
-            border: 2px solid #fff;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .btn:active { background-color: #555; }
-        .up { grid-column: 2; grid-row: 1; }
-        .left { grid-column: 1; grid-row: 2; }
-        .right { grid-column: 3; grid-row: 2; }
-        .down { grid-column: 2; grid-row: 3; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -58,70 +18,6 @@
         <button class="btn down" onclick="move('down')">▼</button>
     </div>
 
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const GRID_SIZE = 32;
-
-        const hero = { x: 1, y: 4, char: "🧙‍♂️" };
-        const maou = { x: 8, y: 4, char: "😈", isAlive: true };
-        let message = "魔王に近づいて一撃で倒せ！";
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // 背景のグリッド
-            ctx.strokeStyle = "#222";
-            for (let i = 0; i <= canvas.width; i += GRID_SIZE) {
-                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
-            }
-
-            // 魔王
-            if (maou.isAlive) {
-                ctx.font = "24px sans-serif";
-                ctx.fillText(maou.char, maou.x * GRID_SIZE + 4, maou.y * GRID_SIZE + 26);
-            }
-
-            // ゆうしゃ
-            ctx.font = "24px sans-serif";
-            ctx.fillText(hero.char, hero.x * GRID_SIZE + 4, hero.y * GRID_SIZE + 26);
-
-            // メッセージ
-            ctx.fillStyle = "white";
-            ctx.font = "14px sans-serif";
-            ctx.fillText(message, 10, canvas.height - 15);
-        }
-
-        function move(direction) {
-            if (!maou.isAlive) return;
-
-            let nextX = hero.x;
-            let nextY = hero.y;
-
-            if (direction === 'up' && hero.y > 0) nextY--;
-            if (direction === 'down' && hero.y < 8) nextY++;
-            if (direction === 'left' && hero.x > 0) nextX--;
-            if (direction === 'right' && hero.x < 9) nextX++;
-
-            if (nextX === maou.x && nextY === maou.y) {
-                maou.isAlive = false;
-                message = "⚔️ 一撃必殺！魔王を倒した！";
-            } else {
-                hero.x = nextX;
-                hero.y = nextY;
-            }
-            draw();
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowUp' || e.key === 'w') move('up');
-            if (e.key === 'ArrowDown' || e.key === 's') move('down');
-            if (e.key === 'ArrowLeft' || e.key === 'a') move('left');
-            if (e.key === 'ArrowRight' || e.key === 'd') move('right');
-        });
-
-        draw();
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
