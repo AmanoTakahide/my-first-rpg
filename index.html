@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一撃必殺RPG</title>
+    <title>タマ狩りRPG</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>一撃必殺RPG</h1>
-    <canvas id="gameCanvas" width="320" height="320"></canvas>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="320" height="320"></canvas>
 
-    <div class="controller">
-        <button class="btn up" onclick="move('up')">▲</button>
-        <button class="btn left" onclick="move('left')">◀</button>
-        <button class="btn right" onclick="move('right')">▶</button>
-        <button class="btn down" onclick="move('down')">▼</button>
+        <div class="controls">
+            <div class="d-pad">
+                <button class="btn" id="btn-up">▲</button>
+                <div class="d-pad-horizontal">
+                    <button class="btn" id="btn-left">◀</button>
+                    <button class="btn" id="btn-right">▶</button>
+                </div>
+                <button class="btn" id="btn-down">▼</button>
+            </div>
+
+            <div class="system-buttons">
+                <button class="btn system-btn" id="btn-start">START</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn action-btn" id="btn-b">B</button>
+                <button class="btn action-btn" id="btn-a">A</button>
+            </div>
+        </div>
     </div>
 
     <script src="game.js"></script>
